@@ -11,6 +11,7 @@ def modrinthmodmanager():
 @modrinthmodmanager.command
 @click.argument("query")
 def search(query: str):
+    """Search for and download a project from modrinth"""
     results = modrinth.Projects.Search(query).hits
     result_names = []
     for result in results:
@@ -32,6 +33,7 @@ def search(query: str):
 
 @modrinthmodmanager.command
 def delete():
+    """Delete a .jar or .zip file"""
     directory_contents = os.listdir(".")
     mods = []
     for file in directory_contents:
