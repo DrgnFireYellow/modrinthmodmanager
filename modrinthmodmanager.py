@@ -2,6 +2,7 @@ import modrinth
 import requests
 import rich_click as click
 import questionary
+import os
 
 @click.group
 def modrinthmodmanager():
@@ -28,7 +29,18 @@ def search(query: str):
         if version.name == selected_version:
             with open(version.files[0]["filename"], "wb") as modfile:
                 modfile.write(requests.get(version.files[0]["url"]).content)
-    
+
+@modrinthmodmanager.command
+def delete():
+    directory_contents = os.listdir(".")
+    mods = []
+    for file in directory_contents:
+        if file.endswith(".jar"):
+            mods.append(file)
+    file_to_delete = questionary.select("Choose a mod to delete:", mods, qmark="🗑️").ask()
+    if questionary.confirm("Are you sure?", False).ask():
+        os.remove(file_to_delete)
+
 
 if __name__ == "__main__":
     modrinthmodmanager()
