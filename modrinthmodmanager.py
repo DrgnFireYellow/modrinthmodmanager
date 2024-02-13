@@ -1,6 +1,6 @@
 import modrinth
 import requests
-import click
+import rich_click as click
 import questionary
 
 @click.group

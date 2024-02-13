@@ -1,4 +1,4 @@
 modrinth
 requests
-click
+rich-click
 questionary
