@@ -9,9 +9,11 @@ def modrinthmodmanager():
     pass
 
 @modrinthmodmanager.command
-@click.argument("query")
+@click.option("--query", help="The query to search for")
 def search(query: str):
     """Search for and download a project from modrinth"""
+    if not query:
+        query = questionary.text("Enter a search query:", qmark="🔎").ask()
     results = modrinth.Projects.Search(query).hits
     result_names = []
     for result in results:
