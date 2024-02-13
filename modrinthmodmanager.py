@@ -35,7 +35,7 @@ def delete():
     directory_contents = os.listdir(".")
     mods = []
     for file in directory_contents:
-        if file.endswith(".jar"):
+        if file.endswith(".jar") or file.endswith(".zip"):
             mods.append(file)
     file_to_delete = questionary.select("Choose a mod to delete:", mods, qmark="🗑️").ask()
     if questionary.confirm("Are you sure?", False).ask():
